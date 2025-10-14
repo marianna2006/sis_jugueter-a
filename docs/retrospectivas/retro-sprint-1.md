@@ -1,3 +1,4 @@
+
 # Retrospectiva Sprint [1]
 
 **Fecha:** [13/10/2025]

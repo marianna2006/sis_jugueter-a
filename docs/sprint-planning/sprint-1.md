@@ -1,7 +1,7 @@
 # Sprint Planning - Sprint [1]
 
 **Fecha de Planning:** [18/09/2025]
-**Duración del Sprint:** [3 semanas]
+**Duración del Sprint:** [2 semanas]
 
 ## Objetivo del Sprint
 Definir los requisitos y diseñar el prototipo completo de la página web de la juguetería, incluyendo la versión mobile y desktop en Figma, además de organizar las tareas iniciales en Trello y crear el repositorio en GitHub.
