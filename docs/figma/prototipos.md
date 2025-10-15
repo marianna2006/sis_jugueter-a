@@ -43,6 +43,8 @@ Este documento centraliza toda la información sobre los **diseños y prototipos
   - Error: #93D4BC (relleno) / #E33A3A (trazo)
   - Advertencia: #DFCE4F
 
+
+
 **Tipografía:**
 - **Principal mobile:** itim 24 - Textos y contenido
 - **Principal desktop:** itim 32 - Textos y contenido
