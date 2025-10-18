@@ -54,4 +54,4 @@ npm run dev
 
 ## Autor
 
-Proyecto educativo - Ingeniería de Software - Marianna 
+Proyecto educativo - Ingeniería de Software - Marianna Mori
