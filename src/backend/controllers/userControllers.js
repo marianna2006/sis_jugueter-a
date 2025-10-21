@@ -39,6 +39,25 @@ export const userControllers = {
                 message: error.message
             })
         }
-    }
+    },
 
+    async updateUser(req, res){
+        try{
+            const {id} = req.params;
+            const updateData = req.body;
+
+            const updateUser = await userServices.updateUser(id, updateData);
+
+            res.status(200).json({
+                succes: true,
+                data: updateUser,
+                message: 'Usuario actualizado correctamente'
+            });
+        }catch(error){
+            res.status(500).json({
+                succes: false,
+                message: error.message
+            });
+        }
+    }
 }
