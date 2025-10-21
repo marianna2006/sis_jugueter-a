@@ -1,7 +1,7 @@
 import { userServices } from "../services/userServices.js";
 
 export const userControllers = {
-    async getUsers(res){
+    async getUsers(req, res){
         try{
             const users = await userServices.getAllUsers();
             res.status(200).json({
