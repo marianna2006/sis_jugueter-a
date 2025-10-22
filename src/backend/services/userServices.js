@@ -21,7 +21,7 @@ export const userServices = {
         try{
             return await prisma.user.findMany();
         }catch(error){
-            throw new Error ('Error al obtener usuarios.' + error.message )
+            throw error ('Error al obtener usuarios.' + error.message )
         }
     },
 
