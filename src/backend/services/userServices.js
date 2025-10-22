@@ -12,7 +12,7 @@ export const userServices = {
                 data :{email, name}
             })
         }catch(error){
-            throw error ('Error al crear usuario.' + error.message);
+            throw new Error ('Error al crear usuario.' + error.message);
         }
     },
 
@@ -21,7 +21,7 @@ export const userServices = {
         try{
             return await prisma.user.findMany();
         }catch(error){
-            throw error ('Error al obtener usuarios.' + error.message )
+            throw new Error ('Error al obtener usuarios.' + error.message )
         }
     },
 
@@ -33,7 +33,7 @@ export const userServices = {
                 data: data
             })
         }catch(error){
-            throw error ('Error al actualizar usuario' + error.message);
+            throw new Error ('Error al actualizar usuario' + error.message);
         }
     }
 }
