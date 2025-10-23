@@ -22,6 +22,9 @@ const router = express.Router();
  *          example: marianna 
  */
 
+
+//Ruta para llamar al usuario GET
+router.get('/', userControllers.getUsers);
 /**
  * @swagger
  * /api/users:
@@ -34,9 +37,9 @@ const router = express.Router();
  * 
  */
 
-//Rutas para llamar al usuario
-router.get('/', userControllers.getUsers);
 
+//Ruta para crear usuarios POST
+router.post('/', userControllers.createUser);
 /**
  * @swagger
  * /api/users:
@@ -68,8 +71,9 @@ router.get('/', userControllers.getUsers);
  *        description: Error del servidor
  */
 
-router.post('/', userControllers.createUser);
 
+//Ruta para actualizar usuario PUT
+router.put('/:id', userControllers.updateUser);
 /**
  * @swagger
  * /api/users/{id}:
@@ -80,10 +84,10 @@ router.post('/', userControllers.createUser);
  *      - in: path
  *        name: id
  *        required: true
+ *        description: ID del usuario a actualizar
  *        schema:
  *          type: integer
  *          example: 1
- *        description: ID del usuario a actualizar
  *    requestBody:
  *      required: true
  *      content:
@@ -112,10 +116,44 @@ router.post('/', userControllers.createUser);
  *        description: Error del servidor
  */
 
-router.put('/:id', userControllers.updateUser);
 
-//Método para eliminar DELETE
-//Método para actualizar PUT
+//Ruta para eliminiar usuarios DELETE
+router.delete('/:id', userControllers.deleteUser);
+/**
+ * @swagger
+ * /api/users/{id}:
+ *  delete:
+ *    summary: Eliminar usuario
+ *    tags: [Users]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: ID del usuario a eliminar
+ *        schema: 
+ *          type: integer
+ *          example: 5
+ *    responses:
+ *      200:
+ *        description: Usuario eliminado correctamente
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                succes:
+ *                  type: boolean
+ *                  example: true
+ *                message:
+ *                  type: string
+ *                  example: Usuario eliminado correctament👌.
+ *      404:
+ *        description: Usuario no encontrado
+ *      500:
+ *        description: Error del servidor
+ */
+
+
 //Método para modificar PATCH
 
 export default router;
