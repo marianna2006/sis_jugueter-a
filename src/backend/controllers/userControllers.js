@@ -1,7 +1,7 @@
 import { userServices } from "../services/userServices.js";
 
 
-//Endpoint para btener usuarios
+//Endpoint para obtener usuarios
 export const userControllers = {
     async getUsers(req, res){
         try{

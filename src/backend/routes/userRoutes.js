@@ -1,5 +1,5 @@
-import express from 'express';
-import { userControllers } from '../controllers/userControllers.js';
+import express from "express";
+import { userControllers } from "../controllers/userControllers.js";
 
 //Traer controlador
 const router = express.Router();
