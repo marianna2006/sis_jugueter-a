@@ -6,9 +6,9 @@ const router = express.Router();
 router.post("/register", registerUser)
 /**
  * @swagger
- * /api/auth/register:
+ * /api/email/register:
  *  post:
- *    summary: Register usuario y enviar
+ *    summary: Registrar usuario y enviar
  *    tags: [Email]
  *    requestBody:
  *      required: true

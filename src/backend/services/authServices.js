@@ -5,7 +5,7 @@ import { hashPassword, comparePassword, verifyToken, generateToken } from "../ut
 
 export const authServices = {
     //Regitrar usuario
-    async registerUser(data){
+    async register(data){
         try{
             const {email, name, password} = data;
             const hashedPassword = await hashPassword(password);
