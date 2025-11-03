@@ -51,7 +51,7 @@ router.get(
         failureRedirect: "http://localhost:5173/login-error",
     }),
     authControllers.googleCallBack
-)
+);
 
 
 export default router;
