@@ -38,6 +38,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/email", emailRoutes);
 app.use("/api/auth", authRoutes);
+
 app.listen(PORT, () => {
   console.log("Servidor corriendo exitosamente😀😀.");
 });
