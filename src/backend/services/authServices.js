@@ -23,6 +23,8 @@ export const authServices = {
                 token,
             }
 
+            
+
         }catch(error){
             throw new Error ("Error al registrar usuario." + error);
         }
