@@ -1,7 +1,7 @@
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
-import { hashPassword, comparePassword, verifyToken, generateToken } from "../utils/auth.js";
+import { hashPassword, comparePassword, generateToken } from "../utils/auth.js";
 
 export const authServices = {
     //Regitrar usuario
@@ -22,11 +22,35 @@ export const authServices = {
                 user: userWithoutPassword,
                 token,
             }
-
-            
-
         }catch(error){
             throw new Error ("Error al registrar usuario." + error);
         }
     },
+
+    async login(data){
+        try{
+            const { email, password } = data;
+            const user = await prisma.user.findUnique({
+                where: { email }
+            });
+
+            if(!user){
+                throw new Error("Email no encontrado")
+            }
+
+            const isPasswordValid = await comparePassword(password, user.password);
+            if(!isPasswordValid){
+                throw new Error("Contraseña incorrecta")
+            }
+
+            const token = generateToken(user.id, user.email)
+            const {password: _, ...userWithoutPassword } = user;
+            return{
+                user: userWithoutPassword,
+                token,
+            }
+        }catch(error){
+            throw new Error(error.message || "Error al iniciar sesión");
+        }
+    }
 };

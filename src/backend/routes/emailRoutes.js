@@ -8,7 +8,7 @@ router.post("/register", registerUser)
  * @swagger
  * /api/email/register:
  *  post:
- *    summary: Registrar usuario y enviar
+ *    summary: Registrar usuario y enviar bienvenida
  *    tags: [Email]
  *    requestBody:
  *      required: true
