@@ -1,24 +1,7 @@
 import { userServices } from "../services/userServices.js";
 
 
-//Endpoint para obtener usuarios
 export const userControllers = {
-    async getUsers(req, res){
-        try{
-            const users = await userServices.getAllUsers();
-            res.status(200).json({
-                succes: true,
-                data: users
-            })
-        }catch(error){
-            res.status(500).json({
-                succes: false,
-                message: error.message
-            })
-        }
-    },
-
-
     //Endpoint para crear usuarios
     async createUser(req,res){
         try{
@@ -46,6 +29,22 @@ export const userControllers = {
     },
 
 
+    //Endpoint para obtener usuarios
+    async getUsers(req, res){
+        try{
+            const users = await userServices.getAllUsers();
+            res.status(200).json({
+                succes: true,
+                data: users
+            })
+        }catch(error){
+            res.status(500).json({
+                succes: false,
+                message: error.message
+            })
+        }
+    },
+
     //Endpoint para actualizar usuarios
     async updateUser(req, res){
         try{
@@ -67,7 +66,6 @@ export const userControllers = {
         }
     },
 
-
     //Endpoint para eliminar usuarios
     async deleteUser(req, res){
         try{
@@ -84,4 +82,5 @@ export const userControllers = {
             });
         }
     }
+
 }
