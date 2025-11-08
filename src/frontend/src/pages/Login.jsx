@@ -1,5 +1,6 @@
 import { useState } from "react"; //navegacion
 import { Link, useNavigate } from "react-router-dom"; //navegacion
+import { FloatingLabel } from "flowbite-react"; 
 
 function Login() {
   const GOOGLE_AUTH_URL = import.meta.env.VITE_GOOGLE_AUTH_URL;
@@ -38,20 +39,20 @@ function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-x-6 bg-white rounded-xl shadow-md">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-3 mb-4">
           <img src="../assets/logo.svg"></img>
-          <h1>TOY'S HOUSE</h1>
+          <h1 className="text-primary text-2xl font-bold">Iniciar Sesión</h1>
         </div>
-        <h1 className="text-sm text-gray-500 mb-4">
+        <h1 className="flex items-center text-4sm justify-center text-gray-500 mb-4">
           Ingresa tus credenciales para iniciar sesión
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-4sm font-medium text-gray-700"
             >
-              Correo Electronico
+              Correo Electrónico
             </label>
             <input
               id="email"
@@ -65,7 +66,7 @@ function Login() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-4sm font-medium text-gray-700"
             >
               Contraseña
             </label>
@@ -82,7 +83,7 @@ function Login() {
           <div>
             <button
               type="submit"
-              className="w-full px-4 py-2 text-white font-medium bg-blue-500 border border-transparent rounded-md shadow-md hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 "
+              className="w-full px-4 py-2 text-white font-medium bg-gradient-verde border border-transparent rounded-md shadow-md hover:bg-gradient-verde focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 "
             >
               Iniciar Sesion
             </button>
@@ -95,21 +96,23 @@ function Login() {
         </div>
         <div className="text-center">
           <a
-            className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-orange-500"
+            className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-textPrimary bg-gray-300 border border-transparent rounded-md shadow-sm hover:bg-gray-200"
             href={GOOGLE_AUTH_URL}
           >
-            Iniciar sesion con Google
+            Iniciar Sesión con Google
           </a>
         </div>
-        <p className="text-sm text-center text-gray-600">
+        <div className="flex justify-center gap-1 mt-4">
+          <p className="text-4sm text-center text-gray-600">
             ¿No tienes una cuenta?
-        </p>
+          </p>
         <Link
           to="/register"
-          className="font-medium text-blue-600 hover:text-orange-500"
+          className="text-4sm text-primary hover:text-green-600"
         >
           Registrate aqui
         </Link>
+        </div> 
       </div>
     </div>
   );

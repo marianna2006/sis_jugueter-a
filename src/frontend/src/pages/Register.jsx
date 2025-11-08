@@ -41,11 +41,17 @@ function Register() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-md">
-        <h1 className="text-2xl font-bold text-center">Crear una cuenta</h1>
-        
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <img src="../assets/logo.svg"></img>
+          <h1 className="text-primary text-2xl font-bold">Crear Cuenta</h1>
+        </div>
+        <h1 className="flex items-center text-4sm justify-center text-gray-500 mb-4">
+          Ingresa tus credenciales para crear una cuenta
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-4sm font-medium text-gray-700">
+              Nombre
             </label>
             <input
               id="name"
@@ -59,7 +65,7 @@ function Register() {
           </div>
           
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-4sm font-medium text-gray-700">
               Correo Electrónico
             </label>
             <input
@@ -74,7 +80,7 @@ function Register() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-4sm font-medium text-gray-700">
               Contraseña
             </label>
             <input
@@ -94,16 +100,16 @@ function Register() {
           <div>
             <button
               type="submit"
-              className="w-full px-4 py-2 font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full px-4 py-2 font-medium text-white bg-gradient-verde border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Registrarse
             </button>
           </div>
         </form>
 
-        <p className="text-sm text-center text-gray-600">
+        <p className="text-4sm text-center text-gray-600">
           ¿Ya tienes una cuenta?{' '}
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/login" className="text-4sm text-primary hover:text-green-600">
             Inicia sesión
           </Link>
         </p>

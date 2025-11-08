@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import LoginSuccess from "./pages/LoginSuccess";
 import Navbar from "./components/Navbar";
+import { AppFooter } from "./components/Footer";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login-success" element={<LoginSuccess />} />
       </Routes>
+      <AppFooter></AppFooter>
     </BrowserRouter>
   );
 }
