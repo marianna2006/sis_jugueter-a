@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 import { AppFooter } from "./components/Footer";
 import Contacts from "./pages/Contacts";
 import Blogs from "./pages/Blogs";
+import ProductDetail from "./pages/ProductDetail";
+import ProductReview from "./pages/ProductReview";
 
 
 function App() {
@@ -17,10 +19,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/login-success" element={<LoginSuccess />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/product/:id/review" element={<ProductReview />} />
       </Routes>
       <AppFooter></AppFooter>
     </BrowserRouter>

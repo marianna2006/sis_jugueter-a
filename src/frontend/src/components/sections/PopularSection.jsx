@@ -23,12 +23,16 @@ export default function PopularSection() {
       <div className="overflow-x-auto">
         <div className="flex gap-4 p-4">
           {products.length > 0 ? (
-            products.map((p, index) => (
-              <div key={index} className="flex-shrink-0">
+            products.map((p) => (
+              <div key={p.id} className="flex-shrink-0">
                 <ProductCard
+                  id={p.id} // 👈 necesario para el enlace dinámico
                   name={p.name}
                   price={`S/${p.price.toFixed(2)}`}
                   image={p.image}
+                  oldPrice={
+                    p.previousPrice ? `S/${p.previousPrice.toFixed(2)}` : null
+                  }
                 />
               </div>
             ))

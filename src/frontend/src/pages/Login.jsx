@@ -44,7 +44,8 @@ function Login() {
           <h1 className="text-primary text-2xl font-bold">Iniciar Sesión</h1>
         </div>
         <h1 className="flex items-center text-4sm justify-center text-gray-500 mb-4">
-          Ingresa tus credenciales para iniciar sesión
+          Ingresa tus credenciales para
+           iniciar sesión
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
