@@ -9,7 +9,6 @@ import Offers from "../components/sections/Offers";
 import Reviews from "../components/sections/Reviews";
 import Newsletter from "../components/sections/Newsletter";
 
-
 function Home() {
   const [token, setToken] = useState(null);
   useEffect(() => {
@@ -32,49 +31,37 @@ function Home() {
       </section>
 
       {/*Productos destacados */}
-      <div className="p-6">
+      <div className="p-6 mt-10">
         <PopularSection></PopularSection>
       </div>
 
       {/*Categorías */}
-      <h2 className="text-4xl font-bold text-center mt-8 mb-2 text-primary">
-        ¡¡Explora nuestras categorías!!
-      </h2>
-      <p className="text-center text-2xl text-testSecondary mb-4">
-        Encuentra el juguete perfecto para cada lugar y ocasión
-      </p>
-      <div className="mb-10">
+      <div className="p-6 mt-10">
         <Categorias></Categorias>
       </div>
 
       {/*Novedades*/}
-    <div className="mt-10">
-      <NewProductSection></NewProductSection>
-    </div>
+      <div className="p-6 mt-10">
+        <NewProductSection></NewProductSection>
+      </div>
 
       {/*Edades */}
-      <h2 className="text-4xl font-bold text-center mt-12 mb-2 text-primary">
-        ¡¡Clasificados por edad!!
-      </h2>
-      <p className="text-center text-2xl text-testSecondary mb-4">
-        Diseñado para cada etapa de tu vida
-      </p>
-      <div className="">
+      <div className="p-6 mt-10">
         <AgeRanges></AgeRanges>
       </div>
 
       {/*Ofertas */}
-      <div className="mt-10">
+      <div className="p-6 mt-10">
         <Offers></Offers>
       </div>
 
       {/*Reseñas */}
-      <div className="mt-10">
+      <div className="p-6 mt-10">
         <Reviews></Reviews>
       </div>
 
       {/*Boletín informativo */}
-      <div>
+      <div className="p-6 mt-10">
         <Newsletter></Newsletter>
       </div>
     </div>

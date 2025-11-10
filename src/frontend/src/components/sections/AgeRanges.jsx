@@ -9,20 +9,29 @@ export default function AgeRanges() {
   ];
 
   return (
-    <section className="flex justify-center items-center gap-12 py-16 bg-[#F1F5FC] flex-wrap">
-      {edades.map((edad, i) => (
-        <div
-          key={i}
-          className={`relative flex items-center justify-center text-lg font-semibold text-gray-700 
+    <div className="my-6">
+      <h2 className="text-4xl font-bold text-center mt-12 mb-2 text-primary">
+        ¡¡Clasificados por edad!!
+      </h2>
+      <p className="text-center text-2xl text-testSecondary mb-4">
+        Diseñado para cada etapa de tu vida
+      </p>
+
+      <section className="flex justify-center items-center gap-12 py-16 bg-[#F1F5FC] flex-wrap">
+        {edades.map((edad, i) => (
+          <div
+            key={i}
+            className={`relative flex items-center justify-center text-lg font-semibold text-gray-700 
           w-36 h-36 transition-transform duration-300 hover:scale-110 cursor-pointer
           ${edad.forma === "circle" ? "rounded-full" : ""} 
           ${edad.forma === "square" ? "rounded-2xl" : ""}
           ${edad.forma === "triangle" ? "clip-triangle text-white" : ""}`}
-          style={{ backgroundColor: edad.color }}
-        >
-          {edad.rango}
-        </div>
-      ))}
-    </section>
+            style={{ backgroundColor: edad.color }}
+          >
+            {edad.rango}
+          </div>
+        ))}
+      </section>
+    </div>
   );
 }
