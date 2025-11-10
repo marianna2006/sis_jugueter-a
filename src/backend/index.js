@@ -9,6 +9,7 @@ import emailRoutes from "./routes/emailRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import reviewsRoutes from "./routes/reviewRoutes.js";
 
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.js";
@@ -44,6 +45,7 @@ app.use("/api/email", emailRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/reviews", reviewsRoutes);
 
 app.listen(PORT, () => {
   console.log("Servidor corriendo exitosamente😀😀.");
