@@ -49,18 +49,6 @@ export function AppFooter() {
               <FooterLink href="#" className="flex items-center text-xl">
                 Blog
               </FooterLink>
-              
-              <h1 className="text-testSecondary text-xl font-semibold pt-3">Boletín informátivo</h1>
-              <div className="flex items-center w-full max-w-ms">
-                <input
-                  type="email"
-                  placeholder="Ingresa tu email"
-                  className="w-40 px-2 py-1.5 text-sm rounded-l-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 text-black"
-                />
-                <button className="bg-gradient-verde hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-r-xl">
-                  Suscribirse
-                </button>
-              </div>
             </FooterLinkGroup>
           </div>
           <div className="flex flex-col gap-4">
@@ -84,29 +72,21 @@ export function AppFooter() {
             </FooterLinkGroup>
           </div>
           <div className="flex flex-col ">
-            <FooterTitle title="Tiendas" className="text-2xl font-bold pb-2" />
-            <h1 className="text-testSecondary text-xl font-semibold">Pucallpa</h1>
+            <FooterTitle title="Tienda" className="text-2xl font-bold pb-2" />
             <a
               href="#"
               className="text-testSecondary text-xl flex items-center pb-3 hover:underline"
             >
-              Jr. Coronel Portillo 1056, Callería
-            </a>
-            <h1 className="text-testSecondary text-xl font-semibold">Lima</h1>
-            <a
-              href="#"
-              className="text-testSecondary text-xl flex items-center pb-3 hover:underline"
-            >
-              Av. Pardo y Aliaga 621, San Isidro
+              Saenz Peña 127, Pucallpa 
             </a>
             <h2 className="text-testSecondary text-xl">
               Horarios de atención:
             </h2>
             <p className="text-testSecondary text-xl">
-              Lunes a Viernes 10:00 a 19:00 horas
+              Lunes a Viernes 9:00 a.m. - 6:00 p.m.
             </p>
             <p className="text-testSecondary text-xl">
-              Sábado 10:00 a 18:00 horas
+              Sábado 10:00 a.m. - 6:00 p.m.
             </p>
           </div>
         </div>

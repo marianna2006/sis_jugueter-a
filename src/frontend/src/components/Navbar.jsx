@@ -1,9 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }),
+    [];
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setToken(null);
+    navigate("/");
+  };
+
   return (
     <nav className="flex justify-between items-center bg-[#F1F5FC] px-20 shadow-md border-b border-black w-full py-4">
+      {/* Logo */}
       <div className="flex items-center gap-3">
         <img src="../assets/logo.svg" alt="Logo" />
         <li>
@@ -16,61 +35,32 @@ export default function Navbar() {
         </li>
       </div>
 
+      {/* Menú principal */}
       <ul className="flex gap-10 items-center">
-        {/* CATEGORÍAS */}
         <li className="relative group">
           <button className="flex items-center gap-2 text-2xl hover:text-green-500">
             Categorías <FaChevronDown className="text-sm" />
           </button>
 
-          {/* Menú desplegable */}
+          {/* Dropdown */}
           <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50">
-            <ul
-              className="flex flex-col py-2 text-gray-700"
-              onMouseEnter={(e) =>
-                e.currentTarget.parentElement.classList.add("group-hover")
-              }
-            >
-              <li>
-                <Link
-                  to="/categoria/muñecas"
-                  className="block px-4 py-2 hover:bg-green-100 hover:text-green-600"
-                >
-                  Muñecas
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/categoria/educativos"
-                  className="block px-4 py-2 hover:bg-green-100 hover:text-green-600"
-                >
-                  Educativos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/categoria/deportes"
-                  className="block px-4 py-2 hover:bg-green-100 hover:text-green-600"
-                >
-                  Deportes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/categoria/vehiculos"
-                  className="block px-4 py-2 hover:bg-green-100 hover:text-green-600"
-                >
-                  Vehículos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/categoria/construccion"
-                  className="block px-4 py-2 hover:bg-green-100 hover:text-green-600"
-                >
-                  Construcción
-                </Link>
-              </li>
+            <ul className="flex flex-col py-2 text-gray-700">
+              {[
+                { path: "muñecas", name: "Muñecas" },
+                { path: "educativos", name: "Educativos" },
+                { path: "deportes", name: "Deportes" },
+                { path: "vehiculos", name: "Vehículos" },
+                { path: "construccion", name: "Construcción" },
+              ].map((cat) => (
+                <li key={cat.path}>
+                  <Link
+                    to={`/categoria/${cat.path}`}
+                    className="block px-4 py-2 hover:bg-green-100 hover:text-green-600"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </li>
@@ -86,7 +76,7 @@ export default function Navbar() {
 
         <li>
           <Link
-            to="/contactos"
+            to="/contacts"
             className="text-2xl hover:underline hover:decoration-green-500 transition-all duration-200 hover:text-green-500"
           >
             Contactos
@@ -95,7 +85,7 @@ export default function Navbar() {
 
         <li>
           <Link
-            to="/blog"
+            to="/blogs"
             className="text-2xl hover:underline hover:decoration-green-500 transition-all duration-200 hover:text-green-500"
           >
             Blog
@@ -103,7 +93,7 @@ export default function Navbar() {
         </li>
       </ul>
 
-      {/* BUSCADOR */}
+      {/* Buscador */}
       <div className="relative w-64">
         <input
           type="text"
@@ -126,15 +116,26 @@ export default function Navbar() {
         </svg>
       </div>
 
-      <div className="flex gap-8">
+      {/* Iconos y login/logout */}
+      <div className="flex gap-8 items-center">
         <button className="p-2 border hover:border-green-400 rounded">
           <img src="../assets/icon-shoppingcart.svg" alt="Carrito" />
         </button>
-        <Link to="/Login">
-          <button className="p-2 border hover:border-green-400 rounded">
-            <img src="../assets/icon-user.svg" alt="Usuario" />
+
+        {token ? (
+          <button
+            onClick={handleLogout}
+            className="text-xl text-green-600 hover:text-red-500 font-semibold"
+          >
+            Cerrar sesión
           </button>
-        </Link>
+        ) : (
+          <Link to="/login">
+            <button className="p-2 border hover:border-green-400 rounded">
+              <img src="../assets/icon-user.svg" alt="Usuario" />
+            </button>
+          </Link>
+        )}
       </div>
     </nav>
   );

@@ -1,0 +1,44 @@
+import { useEffect, useState } from "react";
+import ProductCard from "../cards/ProductCard";
+
+export default function PopularSection() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products") // tu backend
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("Error al obtener productos:", err));
+  }, []);
+
+  return (
+    <div className="my-6">
+      <h2 className="text-4xl font-bold text-center mb-2 text-primary">
+        ¡¡Productos destacados!!
+      </h2>
+      <p className="text-center text-2xl text-testSecondary mb-4">
+        Los juguetes más populares y más valorados
+      </p>
+
+      <div className="overflow-x-auto">
+        <div className="flex gap-4 p-4">
+          {products.length > 0 ? (
+            products.map((p, index) => (
+              <div key={index} className="flex-shrink-0">
+                <ProductCard
+                  name={p.name}
+                  price={`S/${p.price.toFixed(2)}`}
+                  image={p.image}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-center w-full text-gray-500">
+              Cargando productos...
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
