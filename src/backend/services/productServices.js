@@ -7,7 +7,7 @@ export const productServices = {
     //Crear producto
     async createProduct(data){
         try{
-            const { name, description, price, stock, image, categoryId } = data;
+            const { name, description, price, previousPrice, stock, image, categoryId } = data;
 
             //Categoría
             if (!categoryId) throw new Error("Debe enviar un categoryId válido");
@@ -17,6 +17,7 @@ export const productServices = {
                     name,
                     description,
                     price: parseFloat(price),
+                    previousPrice: parseFloat(previousPrice),
                     stock: parseInt(stock),
                     image,
                     categoryId: parseInt(categoryId)
@@ -64,6 +65,7 @@ export const productServices = {
                 data: {
                     ...data,
                     price: data.price ? parseFloat(data.price) : undefined,
+                    previousPrice: data.previousPrice ? parseFloat(data.previousPrice) : undefined,
                     stock: data.stock ? parseInt(data.stock) : undefined,
                     categoryId: data.categoryId ? parseInt(data.categoryId) : undefined
                 }

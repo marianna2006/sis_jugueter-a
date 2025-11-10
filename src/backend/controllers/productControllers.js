@@ -4,7 +4,7 @@ export const productControllers = {
   // Crear producto
   async createProduct(req, res) {
     try {
-      const { name, description, price, stock, categoryId, image } = req.body;
+      const { name, description, price, previousPrice, stock, categoryId, image } = req.body;
 
       // Validaciones básicas
       if (!name || !price || !stock || !categoryId) {
@@ -17,6 +17,7 @@ export const productControllers = {
         name,
         description,
         price,
+        previousPrice,
         stock,
         categoryId,
         image,
@@ -64,12 +65,13 @@ export const productControllers = {
   async updateProduct(req, res) {
     try {
       const { id } = req.params;
-      const { name, description, price, stock, categoryId, image } = req.body;
+      const { name, description, price, previousPrice, stock, categoryId, image } = req.body;
 
       const updatedProduct = await productServices.updateProduct(id, {
         name,
         description,
         price,
+        previousPrice,
         stock,
         categoryId,
         image,

@@ -22,6 +22,9 @@ const router = express.Router();
  *        price:
  *          type: number
  *          example: 99.99
+ *        oldPrice:
+ *          type: number
+ *          example: 120.00
  *        stock:
  *          type: integer
  *          example: 10
@@ -109,6 +112,9 @@ router.post("/", productControllers.createProduct);
  *              price:
  *                type: number
  *                example: 99.99
+ *              oldPrice:
+ *                type: number
+ *                example: 120.00
  *              stock:
  *                type: integer
  *                example: 10
@@ -158,6 +164,8 @@ router.put("/:id", productControllers.updateProduct);
  *              description:
  *                type: string
  *              price:
+ *                type: number
+ *              oldPrice:
  *                type: number
  *              stock:
  *                type: integer

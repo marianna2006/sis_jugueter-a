@@ -28,6 +28,7 @@ model Product {
   name        String
   description String?
   price       Float
+  previousPrice Float?
   stock       Int
   image       String?
   categoryId  Int
