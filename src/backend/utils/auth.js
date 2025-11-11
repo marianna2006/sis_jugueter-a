@@ -21,7 +21,7 @@ export const generateToken = (user) => {
     {
       id: user.id,
       email: user.email,
-      name: user.name, 
+      name: user.name,
     },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
@@ -31,8 +31,11 @@ export const generateToken = (user) => {
 //Verificar token JWT
 export const verifyToken = (token) => {
   try {
-    return jwt.verify(token, process.env.JWT_SECRET);
+    // Verifica el token con la misma clave secreta usada al generarlo
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return decoded; // devuelve los datos del usuario (id, email, etc.)
   } catch (error) {
+    console.error("Error verificando token:", error.message);
     return null;
   }
 };

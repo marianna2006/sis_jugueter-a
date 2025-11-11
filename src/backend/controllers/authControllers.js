@@ -25,26 +25,30 @@ export const authControllers = {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-      const result = await authServices.login({ email, password });
+      const user = await authServices.login({ email, password });
+
+      // 🔹 Generar token JWT
+      const token = generateToken(user);
 
       res.status(200).json({
         succes: true,
         message: "Inicio de sesión exitoso",
-        data: result,
+        data: {
+          user,
+          token, // <-- aquí lo devolvemos al frontend
+        },
       });
     } catch (error) {
-      if (error.message == "Email no encontrado") {
-        res.status(400).json({
+      if (
+        error.message == "Email no encontrado" ||
+        error.message == "Contraseña incorrecta"
+      ) {
+        return res.status(400).json({
           succes: false,
           message: error.message,
         });
       }
-      if (error.message == "Email no encontrado"){
-        res.status(400).json({
-          succes: false,
-          message: error.message,
-        });
-      }
+
       res.status(500).json({
         succes: false,
         message: error.message,
