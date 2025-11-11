@@ -6,7 +6,7 @@ import Categorias from "../components/sections/Categorias";
 import NewProductSection from "../components/sections/NewProductsSection";
 import AgeRanges from "../components/sections/AgeRanges";
 import Offers from "../components/sections/Offers";
-import Reviews from "../components/sections/Reviews";
+import Reviews from "../components/sections/ReviewsCarousel";
 import Newsletter from "../components/sections/Newsletter";
 
 function Home() {
@@ -31,37 +31,37 @@ function Home() {
       </section>
 
       {/*Productos destacados */}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <PopularSection></PopularSection>
       </div>
 
       {/*Categorías */}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <Categorias></Categorias>
       </div>
 
       {/*Novedades*/}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <NewProductSection></NewProductSection>
       </div>
 
       {/*Edades */}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <AgeRanges></AgeRanges>
       </div>
 
       {/*Ofertas */}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <Offers></Offers>
       </div>
 
       {/*Reseñas */}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <Reviews></Reviews>
       </div>
 
       {/*Boletín informativo */}
-      <div className="p-6 mt-10">
+      <div className="p-6 mt-3">
         <Newsletter></Newsletter>
       </div>
     </div>

@@ -1,8 +1,10 @@
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { useCart } from "./cards/CartContext";
 
 export default function Navbar() {
+  const { cart } = useCart();
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
@@ -118,8 +120,15 @@ export default function Navbar() {
 
       {/* Iconos y login/logout */}
       <div className="flex gap-8 items-center">
-        <button className="p-2 border hover:border-green-400 rounded">
+        <button className="p-2 border hover:border-green-400 rounded relative">
           <img src="../assets/icon-shoppingcart.svg" alt="Carrito" />
+
+          {/* Contador dinámico */}
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
+              {cart.reduce((acc, p) => acc + p.quantity, 0)}
+            </span>
+          )}
         </button>
 
         {token ? (
