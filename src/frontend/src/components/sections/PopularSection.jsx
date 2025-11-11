@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from "../cards/ProductCard";
 
 export default function PopularSection() {
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
