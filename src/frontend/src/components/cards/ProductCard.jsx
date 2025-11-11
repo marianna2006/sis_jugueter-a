@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import AgregarCarritoButton from "../buttons/AnadirCarritoButton";
 
-export default function ProductCard({ name, price, image, oldPrice }) {
+export default function ProductCard({ id, name, price, image, oldPrice }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-xs transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col h-full">
+    <div onClick={() => navigate(`/product/${id}`)} className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-xs transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col h-full">
       <img
         src={image}
         alt={name}

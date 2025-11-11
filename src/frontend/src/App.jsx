@@ -8,8 +8,6 @@ import { AppFooter } from "./components/Footer";
 import Contacts from "./pages/Contacts";
 import Blogs from "./pages/Blogs";
 import ProductDetail from "./pages/ProductDetail";
-import ProductReview from "./pages/ProductReview";
-
 
 function App() {
   return (
@@ -23,7 +21,6 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/product/:id/review" element={<ProductReview />} />
       </Routes>
       <AppFooter></AppFooter>
     </BrowserRouter>

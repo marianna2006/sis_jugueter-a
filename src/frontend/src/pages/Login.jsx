@@ -1,6 +1,5 @@
 import { useState } from "react"; //navegacion
 import { Link, useNavigate } from "react-router-dom"; //navegacion
-import { FloatingLabel } from "flowbite-react"; 
 
 function Login() {
   const GOOGLE_AUTH_URL = import.meta.env.VITE_GOOGLE_AUTH_URL;
