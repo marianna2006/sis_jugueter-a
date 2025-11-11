@@ -10,7 +10,7 @@ export const authControllers = {
 
       res.status(201).json({
         succes: true,
-        message: "Usuario registrado exitosamente.",
+        message: "Usuario registrado exitosamente",
         data: result,
       });
     } catch (error) {
@@ -21,34 +21,30 @@ export const authControllers = {
     }
   },
 
-  //Login traidicional
+  //Login tradicional
   async login(req, res) {
     try {
       const { email, password } = req.body;
-      const user = await authServices.login({ email, password });
-
-      // 🔹 Generar token JWT
-      const token = generateToken(user);
+      const result = await authServices.login({ email, password });
 
       res.status(200).json({
         succes: true,
-        message: "Inicio de sesión exitoso",
-        data: {
-          user,
-          token, // <-- aquí lo devolvemos al frontend
-        },
+        message: "Inicio de sesion exitoso",
+        data: result,
       });
     } catch (error) {
-      if (
-        error.message == "Email no encontrado" ||
-        error.message == "Contraseña incorrecta"
-      ) {
-        return res.status(400).json({
+      if (error.message == "Email no encontrado") {
+        res.status(400).json({
           succes: false,
           message: error.message,
         });
       }
-
+      if (error.message == "Contraseña incorrecta") {
+        res.status(401).json({
+          succes: false,
+          message: error.message,
+        });
+      }
       res.status(500).json({
         succes: false,
         message: error.message,
@@ -61,7 +57,7 @@ export const authControllers = {
     try {
       const user = req.user;
       const token = generateToken(user.id, user.email);
-      res.redirect(`http://localhost:5173/login-success?token=${token}`); //Vista de frontend exitosa
+      res.redirect(`http://localhost:5173/login-success?token=${token}`); //Vista de frontend exitoso
     } catch (error) {
       res.redirect(
         `http://localhost:5173/login-error?message=${error.message}`

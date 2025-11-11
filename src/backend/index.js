@@ -19,11 +19,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors({
-  origin: "http://localhost:5173", // el puerto donde corre tu frontend
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 app.use(express.urlencoded({ extended: true }));

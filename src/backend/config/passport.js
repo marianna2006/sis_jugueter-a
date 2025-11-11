@@ -8,25 +8,6 @@ import dotenv from "dotenv";
 dotenv.config();
 const prisma = new PrismaClient();
 
-const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
-};
-
-passport.use(
-  new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
-    try {
-      const user = await prisma.user.findUnique({
-        where: { id: jwt_payload.id },
-      });
-      if (user) return done(null, user);
-      else return done(null, false);
-    } catch (error) {
-      return done(error, false);
-    }
-  })
-);
-
 passport.use(
   new GoogleStrategy(
     {
@@ -34,28 +15,28 @@ passport.use(
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: "http://localhost:3000/api/auth/google/callback",
     },
-    async (accesToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       try {
         const email = profile.emails[0].value;
         const googleId = profile.id;
 
-        //Verificar que el usuario no exista en la BD
         let user = await prisma.user.findUnique({
           where: { googleId },
         });
 
-        //Buscar al usuario para actualizarlo con el método de google
         if (!user) {
           user = await prisma.user.findUnique({
             where: { email },
           });
-          //Si encontramos al usuario lo actualizamos con google
+
           if (user) {
             user = await prisma.user.update({
               where: { email },
-              data: { googleId: googleId, avatar: profile.photos[0].value },
+              data: {
+                googleId: googleId,
+                avatar: profile.photos[0].value,
+              },
             });
-            //Si no existe de ninguna forma
           } else {
             user = await prisma.user.create({
               data: {
@@ -67,6 +48,7 @@ passport.use(
             });
           }
         }
+
         return done(null, user);
       } catch (error) {
         return done(error, null);
@@ -75,9 +57,8 @@ passport.use(
   )
 );
 
-//Funciones para que passport maneje lal sesión
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.id.toString());
 });
 
 passport.deserializeUser(async (id, done) => {
