@@ -1,43 +1,55 @@
-import pkg from "@prisma/client";
-const { PrismaClient } = pkg;
-const prisma = new PrismaClient();
+import { reviewServices } from "../services/reviewServices.js";
 
-export const createReview = async (req, res) => {
-  try {
-    const { productId, rating, comment } = req.body;
-    const userId = req.user?.id;
-    if (!userId)
-      return res.status(401).json({ message: "Usuario no autenticado" });
+export const reviewControllers = {
+  // Crear reseña
+  async createReview(req, res) {
+    try {
+      const { productId, rating, comment } = req.body;
+      const userId = req.user?.id;
+      if (!userId)
+        return res.status(401).json({ message: "Usuario no autenticado" });
 
-    const review = await prisma.review.create({
-      data: {
-        productId: parseInt(productId),
-        userId,
+      const review = await reviewServices.createReview({
+        productId,
         rating,
         comment,
-      },
-      include: { user: { select: { name: true } } },
-    });
+        userId,
+      });
+      res.status(201).json(review);
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ message: "Error al crear reseña: " + err.message });
+    }
+  },
 
-    res.status(201).json(review);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Error al crear reseña" });
-  }
-};
+  // Obtener todas las reseñas
+  async getAllReviews(req, res) {
+    try {
+      const reviews = await reviewServices.getAllReviews();
+      res.status(200).json(reviews);
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ message: "Error al obtener reseñas: " + err.message });
+    }
+  },
 
-export const getReviewsByProduct = async (req, res) => {
-  try {
-    const productId = parseInt(req.params.productId);
-
-    const reviews = await prisma.review.findMany({
-      where: { productId },
-      include: { user: { select: { name: true } } },
-    });
-
-    res.json(reviews);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Error al obtener reseñas" });
-  }
+  // Obtener reseñas por producto
+  async getReviewsByProduct(req, res) {
+    try {
+      const { productId } = req.params;
+      const reviews = await reviewServices.getReviewsByProduct(productId);
+      res.status(200).json(reviews);
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({
+          message: "Error al obtener reseñas por producto: " + err.message,
+        });
+    }
+  },
 };

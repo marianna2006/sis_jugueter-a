@@ -4,7 +4,15 @@ export const productControllers = {
   // Crear producto
   async createProduct(req, res) {
     try {
-      const { name, description, price, previousPrice, stock, categoryId, image } = req.body;
+      const {
+        name,
+        description,
+        price,
+        previousPrice,
+        stock,
+        categoryId,
+        image,
+      } = req.body;
 
       // Validaciones básicas
       if (!name || !price || !stock || !categoryId) {
@@ -65,7 +73,15 @@ export const productControllers = {
   async updateProduct(req, res) {
     try {
       const { id } = req.params;
-      const { name, description, price, previousPrice, stock, categoryId, image } = req.body;
+      const {
+        name,
+        description,
+        price,
+        previousPrice,
+        stock,
+        categoryId,
+        image,
+      } = req.body;
 
       const updatedProduct = await productServices.updateProduct(id, {
         name,
@@ -92,7 +108,51 @@ export const productControllers = {
       await productServices.deleteProduct(id);
       res.status(200).json({ message: "Producto eliminado correctamente" });
     } catch (error) {
-      res.status(500).json({ message: "Error al eliminar producto: " + error.message });
+      res
+        .status(500)
+        .json({ message: "Error al eliminar producto: " + error.message });
+    }
+  },
+
+  // Obtener productos populares
+  async getPopularProducts(req, res) {
+    try {
+      const products = await productServices.getPopularProducts();
+      res.status(200).json(products);
+    } catch (error) {
+      res
+        .status(500)
+        .json({
+          message: "Error al obtener productos populares: " + error.message,
+        });
+    }
+  },
+
+  // Obtener productos nuevos
+  async getNewProducts(req, res) {
+    try {
+      const products = await productServices.getNewProducts();
+      res.status(200).json(products);
+    } catch (error) {
+      res
+        .status(500)
+        .json({
+          message: "Error al obtener productos nuevos: " + error.message,
+        });
+    }
+  },
+
+  // Obtener productos en oferta
+  async getOfferProducts(req, res) {
+    try {
+      const products = await productServices.getOfferProducts();
+      res.status(200).json(products);
+    } catch (error) {
+      res
+        .status(500)
+        .json({
+          message: "Error al obtener productos en oferta: " + error.message,
+        });
     }
   },
 };

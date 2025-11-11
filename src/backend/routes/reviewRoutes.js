@@ -1,5 +1,5 @@
 import express from "express";
-import { getReviewsByProduct, createReview } from "../controllers/reviewControllers.js";
+import { reviewControllers } from "../controllers/reviewControllers.js";
 import { authenticate } from "../middlewares/authMiddlewares.js";
 
 //Traer controlador
@@ -36,7 +36,7 @@ const router = express.Router();
  */
 
 // CREAR RESEÑA (solo usuarios autenticados)
-router.post("/", authenticate, createReview);
+router.post("/", authenticate, reviewControllers.createReview);
 /**
  * @swagger
  * /api/reviews:
@@ -74,6 +74,7 @@ router.post("/", authenticate, createReview);
  *        description: Error al crear la reseña
  */
 
-router.get("/:productId", getReviewsByProduct);
+router.get("/:productId", reviewControllers.getReviewsByProduct);
+router.get("/", reviewControllers.getAllReviews);
 
 export default router;

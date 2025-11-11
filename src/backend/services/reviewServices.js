@@ -24,7 +24,19 @@ export const reviewServices = {
         include: { user: { select: { name: true } } },
       });
     } catch (error) {
-        throw new Error("Error al crear usuario." + error.message);
+      throw new Error("Error al crear usuario." + error.message);
+    }
+  },
+
+  async getAllReviews() {
+    try {
+      return await prisma.review.findMany({
+        include: {
+          product: true, 
+        },
+      });
+    } catch (error) {
+      throw new Error("Error al obtener reseñas: " + error.message);
     }
   },
 };

@@ -207,4 +207,8 @@ router.delete("/:id", productControllers.deleteProduct);
  *        description: Producto no encontrado
  */
 
+router.get("/filter/popular", productControllers.getPopularProducts);
+router.get("/filter/new", productControllers.getNewProducts);
+router.get("/filter/offer", productControllers.getOfferProducts);
+
 export default router;

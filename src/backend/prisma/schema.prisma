@@ -35,6 +35,9 @@ model Product {
   cartItems     CartItem[]
   category      Category   @relation(fields: [categoryId], references: [id])
   reviews       Review[]
+  isPopular     Boolean    @default(false)
+  isNew         Boolean    @default(false)
+  isOffer       Boolean    @default(false)
 }
 
 model Category {
