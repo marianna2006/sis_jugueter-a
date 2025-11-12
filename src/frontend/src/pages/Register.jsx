@@ -1,38 +1,42 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  
+
   // Para redirigir al usuario después del registro
   const navigate = useNavigate();
 
   // Función que se ejecuta al enviar el formulario
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/api/auth/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, password }),
       });
 
       const data = await response.json();
+      console.log("Respuesta del servidor:", data);
 
       if (!response.ok) {
-        throw new Error(data.message || 'Error al registrar el usuario');
+        throw new Error(data.message || "Error al registrar el usuario");
+      }
+      // ✅ Guarda el token recibido
+      if (data.data?.token) {
+        localStorage.setItem("authToken", data.data.token);
       }
 
-      console.log('Usuario registrado:', data);
-      navigate('/login-success');
-
+      console.log("Usuario registrado:", data);
+      navigate("/login-success");
     } catch (err) {
       setError(err.message);
     }
@@ -50,7 +54,10 @@ function Register() {
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-4sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-4sm font-medium text-gray-700"
+            >
               Nombre
             </label>
             <input
@@ -63,9 +70,12 @@ function Register() {
               className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-          
+
           <div>
-            <label htmlFor="email" className="block text-4sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-4sm font-medium text-gray-700"
+            >
               Correo Electrónico
             </label>
             <input
@@ -80,7 +90,10 @@ function Register() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-4sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-4sm font-medium text-gray-700"
+            >
               Contraseña
             </label>
             <input
@@ -108,8 +121,11 @@ function Register() {
         </form>
 
         <p className="text-4sm text-center text-gray-600">
-          ¿Ya tienes una cuenta?{' '}
-          <Link to="/login" className="text-4sm text-primary hover:text-green-600">
+          ¿Ya tienes una cuenta?{" "}
+          <Link
+            to="/login"
+            className="text-4sm text-primary hover:text-green-600"
+          >
             Inicia sesión
           </Link>
         </p>
