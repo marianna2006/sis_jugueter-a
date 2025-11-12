@@ -31,6 +31,7 @@ export const authControllers = {
         succes: true,
         message: "Inicio de sesion exitoso",
         data: result,
+        token,
       });
     } catch (error) {
       if (error.message == "Email no encontrado") {
@@ -64,4 +65,6 @@ export const authControllers = {
       ); //Vista de frontend si falla
     }
   },
+
+
 };

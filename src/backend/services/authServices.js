@@ -1,56 +1,75 @@
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
+
 import { hashPassword, comparePassword, generateToken } from "../utils/auth.js";
 
 export const authServices = {
-    //Regitrar usuario
-    async register(data){
-        try{
-            const {email, name, password} = data;
-            const hashedPassword = await hashPassword(password);
-            const user = await prisma.user.create ({
-                data : {email, name, password: hashedPassword},
-            });
+  // 🟢 Registrar usuario
+  async register(data) {
+    try {
+      const { email, name, password } = data;
 
-            //Enviar token
-            const token = generateToken(user.id, user.email);
+      // Verificar si el correo ya existe antes de crear
+      const existingUser = await prisma.user.findUnique({ where: { email } });
+      if (existingUser) {
+        throw new Error("El correo electrónico ya está registrado");
+      }
 
-            //Enviar usuario sin password
-            const {password: _, ...userWithoutPassword } = user;
-            return{
-                user: userWithoutPassword,
-                token,
-            }
-        }catch(error){
-            throw new Error ("Error al registrar usuario." + error);
-        }
-    },
+      // Hashear contraseña
+      const hashedPassword = await hashPassword(password);
 
-    async login(data){
-        try{
-            const { email, password } = data;
-            const user = await prisma.user.findUnique({
-                where: { email }
-            });
+      // Crear usuario
+      const user = await prisma.user.create({
+        data: { email, name, password: hashedPassword },
+      });
 
-            if(!user){
-                throw new Error("Email no encontrado")
-            }
+      // Generar token
+      const token = generateToken(user.id, user.email);
 
-            const isPasswordValid = await comparePassword(password, user.password);
-            if(!isPasswordValid){
-                throw new Error("Contraseña incorrecta")
-            }
+      // Devolver usuario sin password
+      const { password: _, ...userWithoutPassword } = user;
 
-            const token = generateToken(user.id, user.email)
-            const {password: _, ...userWithoutPassword } = user;
-            return{
-                user: userWithoutPassword,
-                token,
-            }
-        }catch(error){
-            throw new Error(error.message || "Error al iniciar sesión");
-        }
+      return {
+        user: userWithoutPassword,
+        token,
+      };
+    } catch (error) {
+      // Si es un error de Prisma por email duplicado
+      if (error.code === "P2002" && error.meta?.target?.includes("email")) {
+        throw new Error("El correo electrónico ya está registrado");
+      }
+      throw new Error("Error al registrar usuario. " + error.message);
     }
+  },
+
+  // 🟣 Iniciar sesión
+  async login(data) {
+    try {
+      const { email, password } = data;
+
+      const user = await prisma.user.findUnique({
+        where: { email },
+      });
+
+      if (!user) {
+        throw new Error("Email no encontrado");
+      }
+
+      const isPasswordValid = await comparePassword(password, user.password);
+      if (!isPasswordValid) {
+        throw new Error("Contraseña incorrecta");
+      }
+
+      const token = generateToken(user.id, user.email);
+      const { password: _, ...userWithoutPassword } = user;
+
+      return {
+        user: userWithoutPassword,
+        token,
+      };
+    } catch (error) {
+      throw new Error(error.message || "Error al iniciar sesión");
+    }
+  },
 };
